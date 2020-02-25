@@ -9,74 +9,171 @@
     ObrazovniInformatorDataContext oi = new ObrazovniInformatorDataContext();
 
 }
-<p>
-    @ViewBag.Greska;
-</p>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+<!DOCTYPE html>
+<html lang="en">
 
-    <div class="form-horizontal">
-        <h4>Чланци</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.Label("Тип")
-            <div class="col-md-10">
-                <select name="Tip">
-                    <option value="ЗАКОНОДАВСТВО,ПРОПИСИ">ЗАКОНОДАВСТВО, ПРОПИСИ</option>
-                    <option value="ВЕСТИ">ВЕСТИ</option>
-                    <option value="ПОСЛОВНЕ ОБАВЕЗЕ ЗА СВЕ БУЏЕТСКЕ КОРИСНИКЕ">ПОСЛОВНЕ ОБАВЕЗЕ ЗА СВЕ БУЏЕТСКЕ КОРИСНИКЕ</option>
-                    <option value="ПОСЛОВНЕ ОБАВЕЗЕ">ПОСЛОВНЕ ОБАВЕЗЕ</option>
-                </select>
-            </div>
-        </div>
+<head>
 
-        <div class="form-group">
-            @Html.Label("Датум")
-            <div class="col-md-10">
-                <input type="text" name="Datum" value="@Model.Datum" />
-                @Html.ValidationMessageFor(model => model.Datum, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.Label("Спецификације Буџетских Корисника")
-            <div class="col-md-10">
-                <select name="IDSBK">
-                    @foreach (SpecificnostiBudzetskihKorisnika s in sbk)
-                    {
-                        <option value="@s.IDSBK">@s.Naziv</option>
-                    }
-                </select>
-                @Html.ValidationMessageFor(model => model.IDSBK, "", new { @class = "text-danger" })
-            </div>
-        </div>
+    <title>Образовни Информатор</title>
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
 
-        <div class="form-group">
-            @Html.Label("Наслов:")
-            <div class="col-md-10">
-                <input type="text" name="Naslov" value="@txt.Naslov" />
-            </div>
-        </div>
+    <!-- Favicons -->
+    <link href="~/Content/assets/img/favicon.png" rel="icon">
+    <link href="~/Content/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
-        <div class="form-group">
-            @Html.Label("Текст:")
-            <div class="col-md-10">
-               <textarea name="Tekst">@txt.Tekst</textarea>
-            </div>
-        </div>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Измени" class="btn btn-default" />
+    <!-- Vendor CSS Files -->
+    <link href="~/Content/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/venobox/venobox.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/Content/assets/vendor/aos/aos.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/Content/assets/css/style.css" rel="stylesheet">
+
+    <!-- =======================================================
+    * Template Name: Moderna - v2.0.0
+    * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+    * Author: BootstrapMade.com
+    * License: https://bootstrapmade.com/license/
+    ======================================================== -->
+    <style>
+        a {
+            color: rgba(98, 0, 121, 0.6);
+        }
+
+            a:hover {
+                color: rgba(232,227,246,0.8);
+            }
+
+        }
+
+        .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
+            color: #ffffff;
+        }
+
+        .nav-menu .drop-down ul a:hover, .nav-menu .drop-down ul .active > a, .nav-menu .drop-down ul li:hover > a {
+            color: rgba(232,227,246,0.8);
+        }
+
+        .nav-menu a {
+            color: #ffffff;
+        }
+
+            .nav-menu a:hover {
+                color: rgba(232,227,246,0.8);
+            }
+
+        #hero::after {
+            background: linear-gradient(to right, rgba(139, 121, 141, 0.6), rgba(98, 0, 121, 0.6)), url(../) center top no-repeat fixed;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <br /><br />
+    <p>
+        @ViewBag.Greska;
+    </p>
+    <div class="container">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <h4>Измени чланак</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-row">
+                    @Html.Label("Тип")<br />
+                    <div class="col-md-6 form-group">
+                        <select name="Tip" class="form-control" id="Tip" data-rule="minlen:4" data-msg="Морате унети најмање 4 карактера">
+                            <option value="ЗАКОНОДАВСТВО,ПРОПИСИ">ЗАКОНОДАВСТВО, ПРОПИСИ</option>
+                            <option value="ВЕСТИ">ВЕСТИ</option>
+                            <option value="ПОСЛОВНЕ ОБАВЕЗЕ ЗА СВЕ БУЏЕТСКЕ КОРИСНИКЕ">ПОСЛОВНЕ ОБАВЕЗЕ ЗА СВЕ БУЏЕТСКЕ КОРИСНИКЕ</option>
+                            <option value="ПОСЛОВНЕ ОБАВЕЗЕ">ПОСЛОВНЕ ОБАВЕЗЕ</option>
+                        </select>
+                    </div>
+                    <div class="validate"> </div>
+                </div>
+
+                <div class="form-row">
+                    @Html.Label("Датум")<br />
+                    <div class="col-md-6 form-group">
+
+                        <input type="text" name="Datum" id="Datum" class="form-control" placeholder="Datum" data-rule="Datum" data-msg="Морате унети најмање 4 карактера" value="@Model.Datum" />
+
+                    </div>
+                    <div class="validate"> </div>
+                </div>
+
+                <div class="form-row">
+                    @Html.Label("Спецификације Буџетских Корисника")<br />
+                    <div class="col-md-6 form-group">
+                        <select name="IDSBK" class="form-control" id="IDSBK" data-rule="minlen:4" data-msg="Морате унети најмање 4 карактера">
+                            @foreach (SpecificnostiBudzetskihKorisnika s in sbk)
+                            {
+                                <option value="@s.IDSBK">@s.Naziv</option>
+                            }
+                        </select>
+
+                    </div>
+                    <div class="validate"> </div>
+                </div>
+
+                <div class="form-row">
+                    @Html.Label("Наслов:")<br />
+                    <div class="col-md-6 form-group">
+
+                        <input type="text" name="Naslov" class="form-control" id="IDSBK" data-rule="minlen:4" data-msg="Морате унети најмање 4 карактера" value="@txt.Naslov" />
+                    </div>
+                    <div class="validate"> </div>
+                </div>
+
+                <div class="form-row">
+                    @Html.Label("Текст:")<br />
+                    <div class="col-md-6 form-group">
+                        <textarea name="Tekst" class="form-control" id="Tekst" data-rule="minlen:4" data-msg="Морате унети најмање 4 карактера">@txt.Tekst</textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Измени" class="btn btn-success" />
+                    </div>
+                </div>
             </div>
+        }
+
+        <div>
+            @Html.ActionLink("Назад на чланке", "Index")
         </div>
     </div>
-}
+    <a href="#" class="back-to-top"> <i class="icofont-simple-up"> </i> </a>
+    <!-- Vendor JS Files -->
+    <script src="~/Content/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
+    <script src="~/Content/assets/vendor/php-email-form/validate.js"></script>
+    <script src="~/Content/assets/vendor/venobox/venobox.min.js"></script>
+    <script src="~/Content/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
+    <script src="~/Content/assets/vendor/counterup/counterup.min.js"></script>
+    <script src="~/Content/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="~/Content/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="~/Content/assets/vendor/aos/aos.js"></script>
+    <!-- Template ~ /Content/ Main JS File -->
+    <script src="~/Content/assets/js/main.js"></script>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+</body>
 
+</html>
 

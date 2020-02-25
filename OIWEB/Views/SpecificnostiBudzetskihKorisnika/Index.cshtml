@@ -1,21 +1,16 @@
-﻿@model OIWEB.Clanci
+﻿@model IEnumerable<OIWEB.Clanci>
 
 @{
     Layout = null;
 }
 
-@{
-    Korisnik k = (Korisnik)Session["Korisnik"];
-    List<SpecificnostiBudzetskihKorisnika> sbk = new List<SpecificnostiBudzetskihKorisnika>();
-    sbk = (List<SpecificnostiBudzetskihKorisnika>)ViewBag.SpecificnostiBudzetskihKorisnika;
-}
 
-@{ Layout = null;}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Образовни Информатор</title>
     <meta content="" name="descriptison">
@@ -47,6 +42,25 @@
     * License: https://bootstrapmade.com/license/
     ======================================================== -->
     <style>
+        #hero {
+            width: 100%;
+            height: 70vh;
+        }
+
+            #hero .btn-get-started {
+                border: #fff;
+                background: #fff;
+                color: rgb(123, 87, 140);
+            }
+            #header{
+                height:auto;
+            }
+
+        #header.header-scrolled {
+            background: rgb(123, 87, 140) !important;
+            height: auto;
+        }
+
         a {
             color: #ffffff;
         }
@@ -55,6 +69,8 @@
                 color: rgba(232,227,246,0.8);
             }
 
+        .section-title h2::after {
+            background: rgba(98, 0, 121, 0.6);
         }
 
         .nav-menu a:hover, .nav-menu .active > a, .nav-menu li:hover > a {
@@ -70,19 +86,81 @@
         }
 
             .nav-menu a:hover {
-                color: rgba(232,227,246,0.8);
+                color: rgba(232,227,246,0.2) !important;
             }
 
         #hero::after {
-            background: linear-gradient(to right, rgba(139, 121, 141, 0.6), rgba(98, 0, 121, 0.6)), url(../) center top no-repeat fixed;
+            background: linear-gradient(to right, rgba(139, 121, 141, 0.6), rgba(98, 0, 121, 0.6)), center top no-repeat fixed !important;
+        }
+
+        .blog .blog-pagination li {
+            margin: 0 auto;
+            color: rgb(123, 87, 140) !important;
+        }
+
+        .edit {
+            color: mediumpurple;
+        }
+
+        .delete {
+            color: mediumpurple;
+        }
+
+        #hero::before {
+            background: linear-gradient(to right, rgba(112, 65, 117, 0.72), rgba(98, 0, 121, 0.6)), url(../) center top no-repeat fixed !important;
+        }
+
+        #footer {
+            background: rgb(123, 87, 140) !important;
+        }
+
+            #footer .footer-top {
+                background: rgb(123, 87, 140) !important;
+            }
+
+            #footer .footer-newsletter {
+                background: rgb(123, 87, 140) !important;
+            }
+
+        a.page-link {
+            color: rgb(123, 87, 140) !important;
+        }
+
+        #footer .footer-newsletter form input[type="submit"] {
+            background: rgb(123, 87, 140) !important;
+        }
+
+        #footer .footer-newsletter h4 {
+            color: #fff !important;
+        }
+
+        #footer .footer-top h4 {
+            color: #fff !important;
+        }
+
+        #footer .footer-top .footer-info h3 {
+            color: #fff !important;
+        }
+
+        #footer .footer-top .social-links a {
+            background: #fff;
+            color: rgb(123, 87, 140) !important;
+        }
+
+        .back-to-top {
+            background: #fff;
+            color: rgb(123, 87, 140) !important;
+        }
+
+
+        #hero .btn-get-started:hover {
+            background: rgba(117, 80, 135, 0.8) !important;
         }
     </style>
-
 </head>
 
 <body>
-    <!--pocetak hedera-->
-    <header id="header" class="fixed-top header-transparent">
+    <header id="header" class="fixed-top">
         <div class="container">
 
             <div class="logo float-left">
@@ -151,111 +229,84 @@
 
         </div>
     </header><!-- End Header -->
-
-    <br /><br />
-
-    <p>
-        @ViewBag.Greska;
-    </p>
-    <div class="container">
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-        <div class="form-horizontal">
-            <h2>Креирај чланак</h2>
-            <hr />
-            <div class="form-row">
-                @Html.Label("Тип")<br />
-                <div class="col-md-6 form-group">
+    
+    <!--MAIN SECTION-->
+   
+    <main id="main">
 
 
-                    <select name="Tip" class="form-control" id="Tip" data-rule="minlen:4" data-msg="Морате унети најмање 4 карактера">
-                        <option value="ЗАКОНОДАВСТВО,ПРОПИСИ">ЗАКОНОДАВСТВО, ПРОПИСИ</option>
-                        <option value="ВЕСТИ">ВЕСТИ</option>
-                        <option value="ПОСЛОВНЕ ОБАВЕЗЕ ЗА СВЕ БУЏЕТСКЕ КОРИСНИКЕ">ПОСЛОВНЕ ОБАВЕЗЕ ЗА СВЕ БУЏЕТСКЕ КОРИСНИКЕ</option>
-                        <option value="ПОСЛОВНЕ ОБАВЕЗЕ">ПОСЛОВНЕ ОБАВЕЗЕ</option>
-                    </select>
+        <!-- ======= Features Section ======= -->
+        <section class="features">
+            <div class="container">
+
+                <div class="section-title">
+                    <br /><br /><br /><br />
+                    <h2>ДРЖАВНА УПРАВА</h2>
+
                 </div>
-                <div class="validate"> </div>
-            </div>
-
-            <div class="form-row">
-                @Html.Label("Датум:")<br />
-                <div class="col-md-6 form-group">
-
-                    <div class="col-md-10">
-                        <input type="date" name="Datum" id="Datum" class="form-control" placeholder="Datum" data-rule="Datum" data-msg="Убаците валидан мејл" />
-
-                    </div>
-                    <div class="validate"> </div>
-                </div>
-            </div>
-
-                @Html.Label("Спецификација буџетских корисника:")<br />
-                <div class="col-md-6 form-group">
-
-                    <select name="IDSBK" class="form-control" id="IDSBK" data-rule="minlen:4" data-msg="Морате унети најмање 4 карактера">
-                        @foreach (SpecificnostiBudzetskihKorisnika s in sbk)
+                @foreach (var item in Model)
+                {
+                    List<ClanciTxt> clanciTxt = (List<ClanciTxt>)ViewBag.Tekstovi;
+                    foreach (var tekst in clanciTxt)
+                    {
+                        if (item.IDClanak == tekst.IDClanak)
                         {
-                            <option value="@s.IDSBK">@s.Naziv</option>
+
+
+
+                            <div class="row" data-aos="fade-up">
+
+                                <div class="col-md-7 pt-4">
+                                    <h2>@item.Tip</h2>
+                                    <h3>
+                                        @tekst.Naslov
+                                    </h3>
+                                    <p>
+                                        @tekst.Tekst
+                                    </p>
+                                    <p>@item.Datum</p>
+
+                                </div>
+                            </div>
                         }
-                    </select>
-                    <div class="validate"> </div>
-                </div>
+                    }
+                }
 
 
-                @Html.Label("Наслов")<br />
-                <div class="col-md-6 form-group">
-                    <input type="text" name="Naslov" class="form-control" id="IDSBK" data-rule="minlen:4" data-msg="Морате унети најмање 4 карактера" />
-                    <div class="validate"> </div>
-                </div>
-
-
-                @Html.Label("Текст")<br />
-                <div class="col-md-6 form-group">
-                    <textarea name="Tekst" class="form-control" id="Tekst" data-rule="minlen:4" data-msg="Морате унети најмање 4 карактера"></textarea>
-                    <div class="validate"> </div>
-                </div>
-
-
-
-
-                @Html.Label("Корисник")<br />
-                <div class="col-md-6 form-group">
-                    <input type="text" name="IDKorisnik" value="@k.IDKorisnik" class="form-control" id="IDKorisnik" data-rule="minlen:4" data-msg="Морате унети најмање 4 карактера" />
-                    <div class="validate"> </div>
-
-                </div>
-
-
-
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Креирај" class="btn btn-success" />
-                    </div>
-                </div>
             </div>
+        </section><!-- End Features Section -->
+    </main><!-- End #main -->
+    }
 
-            }
-        </div>
 
-    <div>
-        @Html.ActionLink("Назад на чланке", "Index")
-    </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <!-- ======= Footer ======= -->
     <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
 
         <div class="footer-newsletter">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
-                        <h4> Our Newsletter</h4>
-                        <p> Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+                        <h4>Our Newsletter</h4>
+                        <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
                     </div>
                     <div class="col-lg-6">
                         <form action="" method="post">
-                            <input type="email" name="email"> <input type="submit" value="Subscribe">
+                            <input type="email" name="email"><input type="submit" value="Subscribe">
                         </form>
                     </div>
                 </div>
@@ -267,47 +318,47 @@
                 <div class="row">
 
                     <div class="col-lg-3 col-md-6 footer-links">
-                        <h4> Useful Links</h4>
+                        <h4>Useful Links</h4>
                         <ul>
-                            <li> <i class="bx bx-chevron-right"> </i> <a href="#"> Home</a> </li>
-                            <li> <i class="bx bx-chevron-right"> </i> <a href="#"> About us</a> </li>
-                            <li> <i class="bx bx-chevron-right"> </i> <a href="#"> Services</a> </li>
-                            <li> <i class="bx bx-chevron-right"> </i> <a href="#"> Terms of service</a> </li>
-                            <li> <i class="bx bx-chevron-right"> </i> <a href="#"> Privacy policy</a> </li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-links">
-                        <h4> Our Services</h4>
+                        <h4>Our Services</h4>
                         <ul>
-                            <li> <i class="bx bx-chevron-right"> </i> <a href="#"> Web Design</a> </li>
-                            <li> <i class="bx bx-chevron-right"> </i> <a href="#"> Web Development</a> </li>
-                            <li> <i class="bx bx-chevron-right"> </i> <a href="#"> Product Management</a> </li>
-                            <li> <i class="bx bx-chevron-right"> </i> <a href="#"> Marketing</a> </li>
-                            <li> <i class="bx bx-chevron-right"> </i> <a href="#"> Graphic Design</a> </li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
                         </ul>
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-contact">
-                        <h4> Contact Us</h4>
+                        <h4>Contact Us</h4>
                         <p>
                             A108 Adam Street <br>
                             New York, NY 535022<br>
-                            United States <br> <br>
-                            <strong> Phone:</strong> +1 5589 55488 55<br>
-                            <strong> Email:</strong> info@example.com<br>
+                            United States <br><br>
+                            <strong>Phone:</strong> +1 5589 55488 55<br>
+                            <strong>Email:</strong> info@example.com<br>
                         </p>
 
                     </div>
 
                     <div class="col-lg-3 col-md-6 footer-info">
-                        <h3> About Moderna</h3>
-                        <p> Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+                        <h3>About Moderna</h3>
+                        <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
                         <div class="social-links mt-3">
-                            <a href="#" class="twitter"> <i class="bx bxl-twitter"> </i> </a>
-                            <a href="#" class="facebook"> <i class="bx bxl-facebook"> </i> </a>
-                            <a href="#" class="instagram"> <i class="bx bxl-instagram"> </i> </a>
-                            <a href="#" class="linkedin"> <i class="bx bxl-linkedin"> </i> </a>
+                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
                         </div>
                     </div>
 
@@ -317,18 +368,20 @@
 
         <div class="container">
             <div class="copyright">
-                &copy; Copyright <strong> <span> Moderna</span> </strong> . All Rights Reserved
+                &copy; Copyright <strong><span>Образовни Информатор</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
                 <!-- All the links in the footer should remain intact. -->
                 <!-- You can delete the links only if you purchased the pro version. -->
                 <!-- Licensing information: https://bootstrapmade.com/license/ -->
                 <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
-                Designed by <a href="https://bootstrapmade.com/"> BootstrapMade</a>
+                Designed by Лука Догандџић & Анђелија Михајловић</a>
             </div>
         </div>
     </footer><!-- End Footer -->
-    <a href="#" class="back-to-top"> <i class="icofont-simple-up"> </i> </a>
+
+    <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
     <!-- Vendor JS Files -->
     <script src="~/Content/assets/vendor/jquery/jquery.min.js"></script>
     <script src="~/Content/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -340,13 +393,11 @@
     <script src="~/Content/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
     <script src="~/Content/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="~/Content/assets/vendor/aos/aos.js"></script>
-    <!-- Template ~ /Content/ Main JS File -->
+
+    <!-- Template Main JS File -->
     <script src="~/Content/assets/js/main.js"></script>
 
 </body>
 
 </html>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

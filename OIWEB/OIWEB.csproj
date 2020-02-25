@@ -123,6 +123,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SpecificnostiBudzetskihKorisnikaController.cs" />
+    <Compile Include="Controllers\StatistikaIPodaciController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -200,6 +202,7 @@
     <Content Include="Content\images\icons\favicon.ico" />
     <Content Include="Content\js\main.js" />
     <Content Include="Content\Readme.txt" />
+    <Content Include="Content\Statistika\CeneRadaZaDelatnostVanprivrede.htm" />
     <Content Include="Content\vendor\animate\animate.css" />
     <Content Include="Content\vendor\animsition\css\animsition.css" />
     <Content Include="Content\vendor\animsition\css\animsition.min.css" />
@@ -353,6 +356,17 @@
     <Content Include="Views\Home\Proba.cshtml" />
     <Content Include="Views\Home\Create.cshtml" />
     <Content Include="Views\Home\Edit.cshtml" />
+    <Content Include="Views\SpecificnostiBudzetskihKorisnika\Index.cshtml" />
+    <Content Include="Views\SpecificnostiBudzetskihKorisnika\LokalnaSamouprava.cshtml" />
+    <Content Include="Views\SpecificnostiBudzetskihKorisnika\Zdravstvo.cshtml" />
+    <Content Include="Views\SpecificnostiBudzetskihKorisnika\Prosveta.cshtml" />
+    <Content Include="Views\SpecificnostiBudzetskihKorisnika\SocijalnaZastita.cshtml" />
+    <Content Include="Views\SpecificnostiBudzetskihKorisnika\Kultura.cshtml" />
+    <Content Include="Views\SpecificnostiBudzetskihKorisnika\Nauka.cshtml" />
+    <Content Include="Views\SpecificnostiBudzetskihKorisnika\Pravosudje.cshtml" />
+    <Content Include="Views\SpecificnostiBudzetskihKorisnika\OmladinaISport.cshtml" />
+    <Content Include="Views\SpecificnostiBudzetskihKorisnika\JavnaPreduzeca.cshtml" />
+    <Content Include="Views\StatistikaIPodaci\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
